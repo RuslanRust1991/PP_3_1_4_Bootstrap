@@ -20,11 +20,15 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    @Transactional(readOnly = true)
     @Override
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);
     }
 
+
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User showUser(Long id) {
         return userRepository.getById(id);
